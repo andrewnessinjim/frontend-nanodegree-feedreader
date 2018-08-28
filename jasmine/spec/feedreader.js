@@ -88,7 +88,6 @@ $(function () {
                 // Prevent repeated handler invocation
                 menu.removeEventListener('transitionend',menuOpenHandler);
 
-
                 // Expect only after the transition ends when menu is closed
                 menu.addEventListener('transitionend', function menuCloseHandler() {
                     expect(isOffScreen(menu)).toBe(true);
