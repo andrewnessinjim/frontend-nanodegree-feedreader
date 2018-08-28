@@ -133,11 +133,26 @@ $(function () {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        it('changes the feed content', function () {
-            expect(true).toBe(true);
-        })
-    })
+        it('changes the feed content', function (done) {
+            let initiallyLoadedFeeds;
+            loadFeed(0, savedAndReload);
 
+            function savedAndReload() {
+                initiallyLoadedFeeds = document.querySelectorAll('.feed .entry h2');
+                loadFeed(1, checkIfContentChanged);
+
+                function checkIfContentChanged () {
+                    document.querySelectorAll('.feed .entry h2').forEach(function(header, index) {
+                        if(initiallyLoadedFeeds[index]) {
+                            //The headers from first loadFeed function should not be the same as the newly loaded headers
+                            expect(header.textContent).not.toBe(initiallyLoadedFeeds[index].textContent);
+                        }
+                    });
+                    done();
+                }
+            }
+        });
+    })
 }());
 
 function isOffScreen(el) {
