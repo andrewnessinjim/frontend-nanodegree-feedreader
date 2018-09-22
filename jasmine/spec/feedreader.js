@@ -134,9 +134,9 @@ $(function () {
          */
         it('changes the feed content', function (done) {
             let initiallyLoadedFeeds;
-            loadFeed(0, savedAndReload);
+            loadFeed(0, saveAndReload);
 
-            function savedAndReload() {
+            function saveAndReload() {
                 initiallyLoadedFeeds = document.querySelectorAll('.feed .entry h2');
                 loadFeed(1, checkIfContentChanged);
 
